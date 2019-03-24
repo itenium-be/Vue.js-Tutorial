@@ -1,8 +1,6 @@
 Vue.component('product-review', {
-  props: ['averageReviewScore'],
   template: `
     <form class="review-form" @submit.prevent="onSubmit">
-      <h3 v-if="averageReviewScore">Score: {{ averageReviewScore }}</h3>
       <h3>Add Review</h3>
       <label>Name</label>
       <input v-model="name">
@@ -42,6 +40,7 @@ Vue.component('product-review', {
  
  
  
+
  
 Vue.component('product', {
   props: {
@@ -54,7 +53,10 @@ Vue.component('product', {
       </div>
  
       <div class="product-info">
-          <h1>{{ product }}</h1>
+          <h1>
+            {{ product }}
+            <i v-for="i in averageReviewScore" class="fa fa-star"></i>
+          </h1>
  
           <div>
             <p v-if="inventory > 10">In Stock</p>
@@ -79,11 +81,8 @@ Vue.component('product', {
               :style="{backgroundColor: variant.color}"
               @mouseover="selectedVariantIndex = index">
           </div>
- 
-          <product-review
-            @add-review="addReview"
-            :averageReviewScore="averageReviewScore"
-          ></product-review>
+
+          <product-review @add-review="addReview"></product-review>
       </div>
     </div>
   `,
@@ -106,7 +105,7 @@ Vue.component('product', {
       this.$emit('add-to-cart', {product: this.product, variant: selectedVariant});
     },
     addReview(review) {
-      console.log('addReview', review);
+      this.reviews.push(review.rating);
     }
   },
   computed: {
