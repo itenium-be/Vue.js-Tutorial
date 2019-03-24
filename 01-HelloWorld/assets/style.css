@@ -9,6 +9,12 @@ body {
   height: 60px;
 }
 
+.nav-bar h1 {
+  padding: 5px;
+  font-family: cursive;
+  margin-left: 10px;
+}
+
 .product {
   display: flex;
   flex-flow: wrap;
