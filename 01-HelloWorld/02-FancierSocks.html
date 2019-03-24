@@ -17,25 +17,18 @@
             <h1>{{ title }}</h1>
 
 
-            <!-- Conditionals -->
             <div>
-              <!-- Falsey will not include in DOM -->
               <p v-if="inventory > 10">In Stock</p>
               <p v-else-if="inventory">Almost sold out</p>
               <p v-else>Out of Stock</p>
-
-              <!-- Render with display: none -->
-              <p v-show="inventory < 0">Wuuk?</p>
             </div>
 
 
-            <!-- Events -->
             <button
               v-on:click="cart++; inventory--"
               :disabled="!inventory"
-              :class="{disabledButton: inventory ? false : true}"
+              :class="inventory ? '' : 'disabledButton'"
             >
-              <!-- Method: addToCart -->
               Add to Cart
             </button>
 
@@ -46,15 +39,19 @@
 
 
             <!-- Loops -->
-            <div v-for="variant in variants"
-                 :key="variant.id"
-                 class="color-box"
-                 :style="{backgroundColor: variant.color}"
-                 @mouseover="setImage(variant.color)">
-              </div>
+            <div v-for="(variant, index) in variants"
+                :key="variant.id"
+                class="color-box"
+                :style="{backgroundColor: variant.color}"
+                @mouseover="setSelectedVariant(variant, index)">
+            </div>
         </div>
       </div>
     </div>
+
+    <a href="01-Socks.html" class="prev">
+        <i class="fas fa-arrow-left"></i> moving back
+    </a>
   </body>
 </html>
 
@@ -64,8 +61,7 @@
     el: '#app',
     data: {
       product: 'Socks',
-      image: './assets/socks-green.jpg',
-      imageTitle: 'Green Socks',
+      selectedVariantIndex: 0,
       variants: [
         {id: 1, color: 'green'},
         {id: 2, color: 'blue'}
@@ -74,19 +70,19 @@
       cart: 0
     },
     methods: {
-      addToCart() {
-        this.cart++;
-        this.inventory--;
-      },
-      setImage(color) {
-        console.log('Vue object with data and methods', this);
-        this.image = `./assets/socks-${color}.jpg`;
+      setSelectedVariant(variant, index) {
+        console.log('hover', index, variant);
+        this.selectedVariantIndex = index;
       }
     },
     computed: {
       title() {
         // Return values are cached
         return this.product.toUpperCase();
+      },
+      image() {
+        const color = this.variants[this.selectedVariantIndex].color;
+        return `./assets/socks-${color}.jpg`;
       }
     }
   });

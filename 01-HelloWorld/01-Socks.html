@@ -16,50 +16,50 @@
         </div>
 
         <div class="product-info">
-            <!-- Binding -->
-            <h1>{{ product }}</h1>
+          <!-- Binding -->
+          <h1>{{ product }}</h1>
 
 
-            <!-- Conditionals -->
-            <div>
-              <!-- Falsey will not include in DOM -->
-              <p v-if="inventory > 10">In Stock</p>
-              <p v-else-if="inventory">Almost sold out</p>
-              <p v-else>Out of Stock</p>
+          <!-- Conditionals -->
+          <div>
+            <!-- Falsey will not include in DOM -->
+            <p v-if="inventory > 10">In Stock</p>
+            <p v-else-if="inventory">Almost sold out</p>
+            <p v-else>Out of Stock</p>
 
-              <!-- Render with display: none -->
-              <p v-show="inventory < 0">Wuuk?</p>
-            </div>
-
-
-            <!-- Events -->
-            <button
-              v-on:click="cart++; inventory--"
-              :disabled="!inventory"
-              :class="{disabledButton: inventory ? false : true}"
-            >
-              <!-- Method: addToCart -->
-              Add to Cart
-            </button>
-
-            <div class="cart">
-              {{cart}}
-              <i class="fas fa-shopping-cart"></i>
-            </div>
+            <!-- Render with display: none -->
+            <p v-show="inventory < 0">Wuuk?</p>
+          </div>
 
 
-            <!-- Loops -->
-            <div v-for="variant in variants"
-                 :key="variant.id"
-                 class="color-box"
-                 :style="{backgroundColor: variant.color}"
-                 @mouseover="setImage(variant.color)">
-              </div>
+          <!-- Events -->
+          <button
+            v-on:click="cart++; inventory--"
+            :disabled="!inventory"
+            :class="{disabledButton: inventory ? false : true}"
+          >
+            <!-- Method: addToCart -->
+            Add to Cart
+          </button>
+
+          <div class="cart">
+            {{cart}}
+            <i class="fas fa-shopping-cart"></i>
+          </div>
+
+
+          <!-- Loops -->
+          <div v-for="variant in variants"
+            :key="variant.id"
+            class="color-box"
+            :style="{backgroundColor: variant.color}"
+            @mouseover="setImage(variant.color)">
+          </div>
         </div>
       </div>
     </div>
 
-    <a href="02-FancierSocks.html">
+    <a href="02-FancierSocks.html" class="next">
       moving on <i class="fas fa-arrow-right"></i>
     </a>
   </body>
