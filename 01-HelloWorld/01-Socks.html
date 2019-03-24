@@ -1,0 +1,101 @@
+<!-- https://www.vuemastery.com -->
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+    <link href="./assets/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  </head>
+  <body>
+    <div id="app">
+      <div class="nav-bar"></div>
+      <div class="product">
+        <div class="product-image">
+          <img v-bind:src="image" :title="imageTitle">
+          <!-- Attribute Shorthands -->
+          <!-- :src, :alt, :title, :class, :style, :disabled -->
+        </div>
+
+        <div class="product-info">
+            <!-- Binding -->
+            <h1>{{ product }}</h1>
+
+
+            <!-- Conditionals -->
+            <div>
+              <!-- Falsey will not include in DOM -->
+              <p v-if="inventory > 10">In Stock</p>
+              <p v-else-if="inventory">Almost sold out</p>
+              <p v-else>Out of Stock</p>
+
+              <!-- Render with display: none -->
+              <p v-show="inventory < 0">Wuuk?</p>
+            </div>
+
+
+            <!-- Events -->
+            <button
+              v-on:click="cart++; inventory--"
+              :disabled="!inventory"
+              :class="{disabledButton: inventory ? false : true}"
+            >
+              <!-- Method: addToCart -->
+              Add to Cart
+            </button>
+
+            <div class="cart">
+              {{cart}}
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+
+
+            <!-- Loops -->
+            <div v-for="variant in variants"
+                 :key="variant.id"
+                 class="color-box"
+                 :style="{backgroundColor: variant.color}"
+                 @mouseover="setImage(variant.color)">
+              </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+<script type="text/javascript">
+  const app = new Vue({
+    el: '#app',
+    data: {
+      product: 'Socks',
+      image: './assets/socks-green.jpg',
+      imageTitle: 'Green Socks',
+      variants: [
+        {id: 1, color: 'green'},
+        {id: 2, color: 'blue'}
+      ],
+      inventory: 3,
+      cart: 0
+    },
+    methods: {
+      addToCart() {
+        this.cart++;
+        this.inventory--;
+      },
+      setImage(color) {
+        console.log('Vue object with data and methods', this);
+        this.image = `./assets/socks-${color}.jpg`;
+      }
+    },
+    computed: {
+      title() {
+        // Return values are cached
+        return this.product.toUpperCase();
+      }
+    }
+  });
+  console.log('Modify data directly from the console with `app.product = "Shoes";`');
+</script>
+
+
+<!-- livereload -->
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>

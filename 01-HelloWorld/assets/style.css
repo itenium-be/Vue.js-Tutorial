@@ -7,13 +7,12 @@ body {
   .nav-bar {
     background: linear-gradient(-90deg, #84CF6A, #16C0B0);
     height: 60px;
-    margin-bottom: 15px;
   }
 
   .product {
     display: flex;
     flex-flow: wrap;
-    padding: 1rem;
+    padding: 0rem 1rem;
   }
 
   img {
@@ -38,16 +37,24 @@ body {
     height: 40px;
     margin-top: 5px;
   }
+
+  .active {
+    border: 2px solid black;
+  }
   
   .cart {
-    margin-right: 25px;
-    float: right;
+    position: absolute;
     border: 1px solid #d8d8d8;
-    padding: 5px 20px;
+    padding: 11px 15px;
+    top: 8px;
+    right: 13px;
+    color: royalblue;
+    background-color: antiquewhite;
   }
   
   button {
-    margin-top: 30px;
+    margin-top: -95px;
+    float: right;
     border: none;
     background-color: #1E95EA;
     color: white;
