@@ -1,6 +1,5 @@
 <html>
   <head>
-    <script src="https://unpkg.com/vue"></script>
     <link href="./assets/style.css" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet">
     <title>Reviewable Socks</title>
@@ -17,97 +16,15 @@
       </div>
     </div>
 
-    <a href="02-ComputedSocks.html" class="prev">
+    <a href="03-ComponentSocks.html" class="prev">
       <i class="fas fa-arrow-left"></i> moving back
     </a>
   </body>
 </html>
 
 
-<script type="text/javascript">
-  const comp = Vue.component('product', {
-    // Props with validation
-    props: {
-      premium: {type: Boolean, required: true, default: false}
-    },
-    // Without validation
-    // props: ['premium'],
-    template: `
-      <div class="product">
-        <div class="product-image">
-          <img :src="image">
-        </div>
-
-        <div class="product-info">
-            <h1>{{ product }}</h1>
-
-            <div>
-              <p v-if="inventory > 10">In Stock</p>
-              <p v-else-if="inventory">Almost sold out</p>
-              <p v-else>Out of Stock</p>
-            </div>
-
-            <p v-if="premium">FREE Shipping</p>
-            <p v-else>Shipping: $4.99</p>
-
-            <button
-              v-on:click="addToCart"
-              :disabled="!inventory"
-              :class="inventory ? '' : 'disabledButton'"
-            >
-              Add to Cart
-            </button>
-
-            <div v-for="(variant, index) in variants"
-                :key="variant.id"
-                class="color-box"
-                :style="{backgroundColor: variant.color}"
-                @mouseover="selectedVariantIndex = index">
-            </div>
-        </div>
-      </div>
-    `,
-    data() {
-      // Return a fresh object reference each time
-      return {
-        product: 'Socks',
-        selectedVariantIndex: 0,
-        variants: [
-          {id: 1, color: 'green'},
-          {id: 2, color: 'blue'}
-        ],
-        inventory: 3,
-      };
-    },
-    methods: {
-      addToCart() {
-        this.inventory--;
-        const selectedVariant = this.variants[this.selectedVariantIndex];
-        this.$emit('add-to-cart', {product: this.product, variant: selectedVariant});
-      }
-    },
-    computed: {
-      image() {
-        const color = this.variants[this.selectedVariantIndex].color;
-        return `./assets/socks-${color}.jpg`;
-      }
-    }
-  })
-
-  const app = new Vue({
-    el: '#app',
-    data: {
-      premium: true,
-      cart: []
-    },
-    methods: {
-      updateCart(product) {
-        console.log('Adding to cart:', product);
-        this.cart.push(product);
-      }
-    }
-  });
-</script>
+<script src="https://unpkg.com/vue"></script>
+<script src="04-ReviewableSocks.js"></script>
 
 
 <!-- livereload -->

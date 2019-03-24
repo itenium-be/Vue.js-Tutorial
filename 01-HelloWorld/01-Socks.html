@@ -37,7 +37,7 @@
           <button
             v-on:click="cart++; inventory--"
             :disabled="!inventory"
-            :class="{disabledButton: inventory ? false : true}"
+            :class="{'add-to-cart': true, disabledButton: inventory ? false : true}"
           >
             <!-- Method: addToCart -->
             Add to Cart

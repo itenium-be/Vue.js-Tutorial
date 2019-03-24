@@ -58,7 +58,7 @@ img {
   background-color: antiquewhite;
 }
 
-button {
+button.add-to-cart {
   border: none;
   background-color: #1E95EA;
   color: white;
@@ -71,14 +71,13 @@ button {
 } 
 
 .disabledButton {
-  background-color: #d8d8d8;
+  background-color: #d8d8d8 !important;
 }
 
 .review-form {
-  width: 400px;
-  padding: 20px;
-  margin: 40px;
-  border: 1px solid #d8d8d8;
+  width: 200px;
+  padding: 5px;
+  margin: 0px;
 }
 
 input {

@@ -14,38 +14,39 @@
         </div>
 
         <div class="product-info">
-            <!-- Computed Properties -->
-            <h1>{{ title }}</h1>
+          <!-- Computed Properties -->
+          <h1>{{ title }}</h1>
 
 
-            <div>
-              <p v-if="inventory > 10">In Stock</p>
-              <p v-else-if="inventory">Almost sold out</p>
-              <p v-else>Out of Stock</p>
-            </div>
+          <div>
+            <p v-if="inventory > 10">In Stock</p>
+            <p v-else-if="inventory">Almost sold out</p>
+            <p v-else>Out of Stock</p>
+          </div>
 
 
-            <button
-              v-on:click="cart++; inventory--"
-              :disabled="!inventory"
-              :class="inventory ? '' : 'disabledButton'"
-            >
-              Add to Cart
-            </button>
+          <button
+            v-on:click="cart++; inventory--"
+            :disabled="!inventory"
+            class="add-to-cart"
+            :class="inventory ? '' : 'disabledButton'"
+          >
+            Add to Cart
+          </button>
 
-            <div class="cart">
-              {{cart}}
-              <i class="fas fa-shopping-cart"></i>
-            </div>
+          <div class="cart">
+            {{cart}}
+            <i class="fas fa-shopping-cart"></i>
+          </div>
 
 
-            <!-- Loops -->
-            <div v-for="(variant, index) in variants"
-                :key="variant.id"
-                class="color-box"
-                :style="{backgroundColor: variant.color}"
-                @mouseover="setSelectedVariant(variant, index)">
-            </div>
+          <!-- Loops -->
+          <div v-for="(variant, index) in variants"
+              :key="variant.id"
+              class="color-box"
+              :style="{backgroundColor: variant.color}"
+              @mouseover="setSelectedVariant(variant, index)">
+          </div>
         </div>
       </div>
     </div>
