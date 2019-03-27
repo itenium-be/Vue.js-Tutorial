@@ -1,18 +1,30 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <div>
+    <Product :premium="premium" @add-to-cart="updateCart"></Product>
+
+    <div class="cart">
+      {{ cart.length }}
+      <i class="fas fa-shopping-cart"></i>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import Product from "../components/Product.vue";
 
 @Component({
   components: {
-    HelloWorld
+    Product
   }
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  premium = true;
+  cart: string[] = [];
+
+  updateCart(product: any) {
+    console.log("Adding to cart:", product);
+    this.cart.push(product);
+  }
+}
 </script>
