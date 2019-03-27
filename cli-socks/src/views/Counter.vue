@@ -1,7 +1,7 @@
 <template>
   <div class="counter">
     <h1>Vuex Counter</h1>
-    <p>{{ count }}</p>
+    <p>{{ countAlias }}</p>
     <p>
       <button @click="increment">+</button>
       <button @click="decrement">-</button>
@@ -11,7 +11,8 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { mapState, mapGetters } from 'vuex';
+//import { mapState, mapGetters } from 'vuex';
+import { State, Getter, Action, Mutation, namespace } from 'vuex-class';
 
 @Component
 export default class Counter extends Vue {
@@ -19,13 +20,14 @@ export default class Counter extends Vue {
     return this.$store.state.count;
   }
 
+  @Getter countAlias!: number;
+
+
   increment(): void {
     this.$store.commit('increment');
   }
 
-  decrement(): void {
-    this.$store.commit('decrement');
-  }
+  @Mutation decrement!: Function;
 }
 </script>
 

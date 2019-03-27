@@ -13,7 +13,11 @@ export default new Vuex.Store({
   actions: {},
 
   // ~ component.computed
-  getters: {},
+  getters: {
+    countAlias(state) {
+      return state.count;
+    }
+  },
 
   // ~ redux.actions
   mutations: {
