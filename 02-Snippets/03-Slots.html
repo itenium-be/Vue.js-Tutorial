@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+    <title>Slots</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Slots</h1>
+
+      <alert-box>
+        <template v-slot:title>
+          <!-- Shorthand #title -->
+          Oh noes!
+        </template>
+
+        Something bad happened.
+        <!-- Could put default slot into: v-slot:default -->
+      </alert-box>
+
+    </div>
+  </body>
+</html>
+
+
+<script type="text/javascript">
+  Vue.component('alert-box', {
+    template: `
+      <div class="demo-alert-box">
+        <strong><slot name="title">Error!</slot></strong>
+
+        <slot>Default value</slot>
+      </div>
+    `,
+    data() {
+      return {
+        extraContext: 'Aie!'
+      };
+    }
+  });
+
+  const vm = new Vue({
+    el: '#app',
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- livereload -->
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>

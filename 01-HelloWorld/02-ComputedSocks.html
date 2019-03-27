@@ -28,8 +28,7 @@
           <button
             v-on:click="cart++; inventory--"
             :disabled="!inventory"
-            class="add-to-cart"
-            :class="inventory ? '' : 'disabledButton'"
+            :class="{'add-to-cart': true, disabledButton: inventory ? false : true}"
           >
             Add to Cart
           </button>
@@ -41,13 +40,17 @@
 
 
           <!-- Loops -->
-          <div v-for="(variant, index) in variants"
+          <div v-for="(variant, index) in variants.filter(x => !x.soldOut)"
               :key="variant.id"
               class="color-box"
+              :class="{active: selectedVariantIndex === index}"
               :style="{backgroundColor: variant.color}"
-              @mouseover="setSelectedVariant(variant, index)">
-          </div>
+              @mouseover="setSelectedVariant(variant, index)"
+          ></div>
         </div>
+
+        <!-- Can use Math, Date directly inside the templates -->
+        <small>Rendered on: {{ new Date().toGMTString() }} <br><br></small>
       </div>
     </div>
 
@@ -61,15 +64,27 @@
 </html>
 
 
+
+
+
+
+
+
+
+
+
+
+
 <script type="text/javascript">
-  const app = new Vue({
+  const vm = new Vue({
     el: '#app',
     data: {
       product: 'Socks',
       selectedVariantIndex: 0,
       variants: [
         {id: 1, color: 'green'},
-        {id: 2, color: 'blue'}
+        {id: 2, color: 'blue'},
+        {id: 3, color: 'red', soldOut: true},
       ],
       inventory: 3,
       cart: 0
@@ -91,8 +106,23 @@
       }
     }
   });
-  console.log('Modify data directly from the console with `app.product = "Shoes";`');
+  console.log('Modify data directly from the console with `vm.product = "Shoes";`');
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- livereload -->

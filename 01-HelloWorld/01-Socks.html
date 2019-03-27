@@ -37,7 +37,8 @@
           <button
             v-on:click="cart++; inventory--"
             :disabled="!inventory"
-            :class="{'add-to-cart': true, disabledButton: inventory ? false : true}"
+            class="add-to-cart"
+            :class="inventory ? '' : 'disabledButton'"
           >
             <!-- Method: addToCart -->
             Add to Cart
@@ -54,12 +55,15 @@
             :key="variant.id"
             class="color-box"
             :style="{backgroundColor: variant.color}"
-            @mouseover="setImage(variant.color)">
-          </div>
+            @mouseover="setImage(variant.color, $event)"
+          ></div>
         </div>
       </div>
     </div>
 
+    <a href="00-Hello.html" class="prev">
+        <i class="fas fa-arrow-left"></i> moving back
+      </a>
     <a href="02-ComputedSocks.html" class="next">
       moving on <i class="fas fa-arrow-right"></i>
     </a>
@@ -67,8 +71,15 @@
 </html>
 
 
+
+
+
+
+
+
+
 <script type="text/javascript">
-  const app = new Vue({
+  const vm = new Vue({
     el: '#app',
     data: {
       product: 'Socks',
@@ -86,14 +97,30 @@
         this.cart++;
         this.inventory--;
       },
-      setImage(color) {
-        console.log('Vue object with data and methods', this);
+      setImage(color, event) {
+        console.log('Vue instance with data and methods', this, event);
         this.image = `./assets/socks-${color}.jpg`;
       }
     }
   });
-  console.log('Modify data directly from the console with `app.product = "Shoes";`');
+  console.log('Modify data directly from the console with `vm.product = "Shoes";`');
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- livereload -->

@@ -50,6 +50,7 @@ img {
 }
 
 .active {
+  box-sizing: border-box;
   border: 2px solid black;
 }
 
@@ -80,7 +81,7 @@ button.add-to-cart {
 }
 
 .review-form {
-  width: 200px;
+  width: 175px;
   padding: 5px;
   margin: 0px;
 }
@@ -89,10 +90,10 @@ h3 {
   margin-bottom: 6px;
 }
 
-input {
+input:not([type=checkbox]) {
   width: 100%;  
   height: 25px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 textarea {
@@ -118,4 +119,8 @@ a {
 
 a.next {
   float: right;
+}
+
+.error {
+  color: rgb(233, 12, 12);
 }

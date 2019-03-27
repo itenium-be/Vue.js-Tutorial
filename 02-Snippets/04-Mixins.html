@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+    <title>Mixins</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Mixins</h1>
+      Mixin code runs before the Component code.
+      
+      <alert-box></alert-box>
+    </div>
+  </body>
+</html>
+
+
+<script type="text/javascript">
+  const mixin = {
+      // Mixin methods, data, ...
+      // Conflicts? Mixin gets overwritten!
+      created() {
+          console.log('Doing interesting stuff here');
+      }
+  };
+
+  Vue.component('alert-box', {
+    mixins: [mixin],
+    template: `
+      <p>Black Alert!!</p>
+    `
+  });
+
+  const vm = new Vue({
+    el: '#app',
+  });
+
+
+
+  // Global mixin:
+  Vue.mixin({
+      mounted() {
+          console.log('This will run for every component');
+      }
+  });
+
+
+  // Custom option merge strategy
+  //   Vue.config.optionMergeStrategies.myOption = function (toVal, fromVal) {
+  //     // return mergedVal
+  //   }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- livereload -->
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>

@@ -8,7 +8,7 @@
     <div id="app">
       <div class="nav-bar"><h1>Componentized Socks</h1></div>
 
-      <product :premium="premium" @add-to-cart="updateCart"></product>
+      <product :premium="premium" @add-to-cart="updateCart" class="main-prod"></product>
 
       <div class="cart">
         {{ cart.length }}
@@ -28,6 +28,27 @@
 
 <script src="https://unpkg.com/vue"></script>
 <script src="03-ComponentSocks.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- livereload -->
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>

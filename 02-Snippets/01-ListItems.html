@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+    <title>List</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>List</h1>
+      
+      <ul>
+          <li is="todo-item" v-for="todo in todos" :key="todo" :item="todo"></li>
+      </ul>
+
+
+      <!-- is="" is not necessary for -->
+      <!-- String templates (e.g. template: '...') -->
+      <!-- Single-file (.vue) components -->
+      <!-- <script type="text/x-template"> -->
+    </div>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  Vue.component('todo-item', {
+    props: ['item'],
+    template: `<li>{{ item }}</li>`
+  });
+
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      todos: ['Eat', 'Drink', 'Sleep', 'Repeat']
+    },
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- livereload -->
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>

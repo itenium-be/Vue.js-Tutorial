@@ -1,0 +1,59 @@
+<!-- https://www.vuemastery.com -->
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+    <link href="./assets/style.css" rel="stylesheet">
+    <title>Barely Socks</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="nav-bar"><h1>Barely Socks</h1></div>
+      <div class="product">
+        <div class="product-info">
+          <!-- Binding -->
+          <h1>{{ product }}</h1>
+        </div>
+      </div>
+    </div>
+
+    <a href="01-Socks.html" class="next">
+      moving on <i class="fas fa-arrow-right"></i>
+    </a>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      product: 'Socks',
+    },
+  });
+  console.log('Modify data directly from the console with `vm.product = "Shoes";`');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- livereload -->
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>

@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+    <title>Directives</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Directives</h1>
+      
+      <input v-focus>
+
+      <alert-box></alert-box>
+    </div>
+  </body>
+</html>
+
+
+<script type="text/javascript">
+  // Register a global custom directive called `v-focus`
+  Vue.directive('focus', {
+    inserted: function (el) {
+      el.focus();
+    },
+
+    // bind() {}, // Called once, when the directive is first bound
+    // inserted() {}, // Called when the el has been inserted into its parent
+    // update() {},
+    // componentUpdated() {},
+    // unbind() {},
+  });
+
+
+  
+  Vue.component('alert-box', {
+    template: `
+      <p v-alert>Black Alert!!</p>
+    `,
+    directives: {
+        alert: {
+            inserted(el) {
+                // el.focus();
+                console.log('Inserted el', el);
+            }
+        }
+    }
+  });
+
+  const vm = new Vue({
+    el: '#app',
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- livereload -->
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>

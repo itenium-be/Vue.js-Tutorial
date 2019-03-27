@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+    <title>Custom v-model Component</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Custom v-model Component</h1>
+
+      <custom-input v-model="searchText"></custom-input>
+
+      <p>Searching for {{searchText}}...</p>
+    </div>
+  </body>
+</html>
+
+
+<script type="text/javascript">
+  Vue.component('custom-input', {
+    props: ['value'],
+    template: `<input :value="value" @input="$emit('input', $event.target.value)">`
+  })
+
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      searchText: ''
+    },
+  });
+
+
+  // Use a different prop/event for value/input:
+  // Vue.component('base-checkbox', {
+  //   model: {
+  //     prop: 'checked',
+  //     event: 'change'
+  //   },
+  //   props: {
+  //     checked: Boolean
+  //   },
+  //   template: `
+  //     <input
+  //       type="checkbox"
+  //       v-bind:checked="checked"
+  //       v-on:change="$emit('change', $event.target.checked)"
+  //     >
+  //   `
+  // })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- livereload -->
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
