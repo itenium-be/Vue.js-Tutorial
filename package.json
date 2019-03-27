@@ -1,0 +1,23 @@
+{
+  "name": "vue-tutorial",
+  "version": "1.0.0",
+  "description": "Vue.js Session",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itenium-be/Vue.js-Tutorial.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/itenium-be/Vue.js-Tutorial/issues"
+  },
+  "homepage": "https://github.com/itenium-be/Vue.js-Tutorial#readme",
+  "dependencies": {
+    "http-server": "^0.11.1"
+  }
+}
