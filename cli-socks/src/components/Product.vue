@@ -6,7 +6,7 @@
 
     <div class="product-info">
         <h1>
-          {{ product.name }}
+          {{ title }}
           <!-- eslint-disable-next-line vue/no-unused-vars -->
           <i v-for="i in averageReviewScore" class="fa fa-star" :key="i"></i>
         </h1>
@@ -56,13 +56,14 @@ export default class Product extends Vue {
   product = {
     name: "Vue Socks",
     brand: "Vue",
+    price: 5,
     variants: [
       {id: 1, color: "green"},
       {id: 2, color: "blue"}
     ],
     inventory: 3,
     reviews: []
-  }
+  };
 
   selectedVariantIndex = 0;
 
@@ -75,6 +76,10 @@ export default class Product extends Vue {
       return null;
     }
     return Math.round(this.product.reviews.reduce((a, c) => a + c, 0) / this.product.reviews.length);
+  }
+
+  get title() {
+      return `${this.product.name} ($${this.product.price})`;
   }
 
   addToCart() {
