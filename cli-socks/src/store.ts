@@ -46,7 +46,7 @@ export default new Vuex.Store({
 // },
 // {
 //   name: "Angular Socks",
-//   brand: "Angular",
+//   brand: "angular",
 //   price: 15,
 //   variants: [
 //     {id: 1, color: "red"},
