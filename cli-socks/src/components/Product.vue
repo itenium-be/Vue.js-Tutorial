@@ -1,19 +1,19 @@
 <template>
 <div class="product">
     <div class="product-image">
-      <img :src="require(`@/assets/socks-${imageColor}.jpg`)">
+      <img :src="require(`@/assets/socks-${product.brand}-${selectedVariant.color}.jpg`)">
     </div>
 
     <div class="product-info">
         <h1>
-          {{ product }}
+          {{ product.name }}
           <!-- eslint-disable-next-line vue/no-unused-vars -->
           <i v-for="i in averageReviewScore" class="fa fa-star" :key="i"></i>
         </h1>
 
         <div>
-          <p v-if="inventory > 10">In Stock</p>
-          <p v-else-if="inventory">Almost sold out</p>
+          <p v-if="product.inventory > 10">In Stock</p>
+          <p v-else-if="product.inventory">Almost sold out</p>
           <p v-else>Out of Stock</p>
         </div>
 
@@ -22,13 +22,13 @@
 
         <button
           @click="addToCart"
-          :disabled="!inventory"
-          :class="['add-to-cart', inventory ? '' : 'disabledButton']"
+          :disabled="!product.inventory"
+          :class="['add-to-cart', product.inventory ? '' : 'disabledButton']"
         >
           Add to Cart
         </button>
 
-        <div v-for="(variant, index) in variants"
+        <div v-for="(variant, index) in product.variants"
             :key="variant.id"
             class="color-box"
             :class="{active: selectedVariantIndex === index}"
@@ -53,35 +53,39 @@ import ProductReview from './ProductReview.vue';
 export default class Product extends Vue {
   @Prop({default: false}) private premium!: boolean;
 
-  product = "Socks";
-  selectedVariantIndex = 0;
-  variants = [
-    {id: 1, color: "green"},
-    {id: 2, color: "blue"}
-  ];
-  inventory = 3;
-  reviews: number[] = [];
+  product = {
+    name: "Vue Socks",
+    brand: "Vue",
+    variants: [
+      {id: 1, color: "green"},
+      {id: 2, color: "blue"}
+    ],
+    inventory: 3,
+    reviews: []
+  }
 
-  get imageColor(): string {
-    return this.variants[this.selectedVariantIndex].color;
+  selectedVariantIndex = 0;
+
+  get selectedVariant(): any {
+    return this.product.variants[this.selectedVariantIndex];
   }
 
   get averageReviewScore(): number | null {
-    if (!this.reviews.length) {
+    if (!this.product.reviews.length) {
       return null;
     }
-    return Math.round(this.reviews.reduce((a, c) => a + c, 0) / this.reviews.length);
+    return Math.round(this.product.reviews.reduce((a, c) => a + c, 0) / this.product.reviews.length);
   }
 
   addToCart() {
-    console.log('uhoh', this.inventory);
-    this.inventory--;
-    const selectedVariant = this.variants[this.selectedVariantIndex];
+    this.product.inventory--;
+    const selectedVariant = this.product.variants[this.selectedVariantIndex];
     this.$emit('add-to-cart', {product: this.product, variant: selectedVariant});
   }
 
   addReview(review: any) {
-    this.reviews.push(review.rating);
+    const reviews = this.product.reviews as any;
+    reviews.push(review.rating);
   }
 }
 </script>

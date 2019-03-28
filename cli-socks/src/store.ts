@@ -3,6 +3,8 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+// Exercise 5? Kill the counter store and use the products store below!
+
 export default new Vuex.Store({
   // ~ component.data
   state: {
@@ -19,7 +21,7 @@ export default new Vuex.Store({
     }
   },
 
-  // ~ redux.actions
+  // ~ redux.reducers
   mutations: {
     increment(state) {
       state.count++;
@@ -29,3 +31,53 @@ export default new Vuex.Store({
     }
   },
 });
+
+
+// const productList = [{
+//   name: "Vue Socks",
+//   brand: "Vue",
+//   variants: [
+//     {id: 1, color: "green"},
+//     {id: 2, color: "blue"}
+//   ],
+//   inventory: 3,
+//   reviews: []
+// },
+// {
+//   name: "Angular Socks",
+//   brand: "Angular",
+//   variants: [
+//     {id: 1, color: "red"},
+//     {id: 2, color: "blue"}
+//   ],
+//   inventory: 3,
+//   reviews: []
+// },
+// {
+//   name: "npm Socks",
+//   brand: "npm",
+//   variants: [
+//     {id: 1, color: "red"},
+//   ],
+//   inventory: 3,
+//   reviews: []
+// }];
+
+
+// export default new Vuex.Store({
+//   state: {
+//     premium: true,
+//     cart: [],
+//     products: productList
+//   },
+
+//   actions: {},
+//   getters: {},
+
+//   mutations: {
+//     addToCart(state, product) {
+//       const cart = state.cart as any;
+//       cart.push(product);
+//     }
+//   },
+// });

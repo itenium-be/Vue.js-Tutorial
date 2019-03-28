@@ -1,35 +1,41 @@
 Exercises
 =========
-
-Remove from cart
-----------------
-Add a button to remove socks from the Cart.
-- Disable the button when the color is not present in the cart.
+Claim an exercise at https://github.com/itenium-be/Vue.js-Tutorial/issues
 
 
-Inventory per color
+1) Remove from cart
 -------------------
-Keep track of inventory per color.
-- Add to cart should only be enabled when there are socks in that color left in the inventory.
+Add a button to remove socks from the Cart.
 
 
-Reviews
+2) Inventory per color
+----------------------
+Keep track of inventory per color/variant.
+
+
+3) Reviews
+----------
+A. Add validation: Name is required. Must accept the terms.  
+B. Display all reviews already submitted.  
+C. Turn the rating `select` into ⭐⭐⭐⭐⭐.  
+    - Allow for partial selection. (See Github issue for code snippets)
+
+
+4) New page: Cart contents
+--------------------------
+A. Add a product price.  
+B. Create a new `ProductLine` component to display the information. (with an image?)  
+C. Add a new router link `/cart` (`router.ts`)  
+D. Display the cart contents on the component of 4C.  
+E. Allow to order more/less of a product in the Cart.  
+F. Calculate the total Cart cost. (with shipping costs?)  
+
+
+5) Vuex
 -------
-- Add validation: name is required
-- Add validation: Must accept the terms
-- Display all reviews already submitted
-
-
-New page: Cart contents
------------------------
-Add a new router link `/cart` and... display the cart contents.
-- Create a new `CartProduct` component to display the information. (with an image?)
-- Add a product price.
-- Allow to order more/less of a product in the Cart
-- Calculate the total Cart cost. (with shipping costs?)
-
-
-Vuex
-----
-- Put the `Product.vue` product properties in the store.
-- On the main page, loop over the products and display them.
+A. Put the `Product.vue` product properties in `store.ts` in a products array.  
+B. Turn product into a `@Prop() product!: any` of `Product.vue`.  
+C. On the main page, loop over the products and display them.  
+D. Display a list of the `ProductLine` instead and a button to go to the detail page.  
+E. Create a new route to go to a `ProductDetail` page.
+F. The `cart` is now defined in `Home.vue`. Should probably move this to the store aswell?  
