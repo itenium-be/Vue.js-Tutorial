@@ -3,26 +3,26 @@ Exercises
 [Claim an exercise](https://github.com/itenium-be/Vue.js-Tutorial/issues)
 
 
-1) Remove from cart
--------------------
+1 Remove from cart
+------------------
 Add a button to remove socks from the Cart.
 
 
-2) Inventory per color
-----------------------
+2 Inventory per color
+---------------------
 Keep track of inventory per color/variant.
 
 
-3) Reviews
-----------
+3 Reviews
+---------
 A. Add validation: Name is required. Must accept the terms.  
 B. Display all reviews already submitted.  
 C. Turn the rating `select` into selectable stars.  
 C2. Allow for partial selection. (See Github issue for code snippets)
 
 
-4) New page: Cart contents
---------------------------
+4 New page: Cart contents
+-------------------------
 A. Add a product price.  
 B. Create a new `ProductLine` component to display the information. (with an image?)  
 C. Add a new router link `/cart` (`router.ts`)  
@@ -31,8 +31,8 @@ E. Allow to order more/less of a product in the Cart.
 F. Calculate the total Cart cost. (with shipping costs?)  
 
 
-5) Vuex
--------
+5 Vuex
+------
 A. Put the `Product.vue` product properties in `store.ts` in a products array.  
 B. Turn product into a `@Prop() product!: any` of `Product.vue`.  
 C. On the main page, loop over the products and display them.  
