@@ -18,8 +18,8 @@
         </div>
 
         <div>
-          <p v-if="product.inventory > 10">In Stock</p>
-          <p v-else-if="product.inventory">Almost sold out</p>
+          <p v-if="selectedVariant.inventory > 10">In Stock</p>
+          <p v-else-if="selectedVariant.inventory">Almost sold out</p>
           <p v-else>Out of Stock</p>
         </div>
 
@@ -28,8 +28,8 @@
 
         <button
           @click="addToCart"
-          :disabled="!product.inventory"
-          :class="['add-to-cart', product.inventory ? '' : 'disabledButton']"
+          :disabled="!selectedVariant.inventory"
+          :class="['add-to-cart', selectedVariant.inventory ? '' : 'disabledButton']"
         >
           Add to Cart
         </button>
@@ -74,8 +74,8 @@ export default class Product extends Vue {
     brand: "Vue",
     price: 5,
     variants: [
-      {id: 1, color: "green"},
-      {id: 2, color: "blue"}
+      {id: 1, color: "green", inventory: 3},
+      {id: 2, color: "blue", inventory: 5}
     ],
     inventory: 3,
     reviews: []
@@ -99,9 +99,8 @@ export default class Product extends Vue {
   }
 
   addToCart() {
-    this.product.inventory--;
-    const selectedVariant = this.product.variants[this.selectedVariantIndex];
-    this.$emit('add-to-cart', {product: this.product, variant: selectedVariant});
+    this.selectedVariant.inventory--;
+    this.$emit('add-to-cart', {product: this.product, variant: this.selectedVariant});
   }
 
   removeFromCart() {
