@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Product from "./components/Product.vue";
 
+import Cart from "./views/Cart.vue";
 Vue.use(Router);
 
 export default new Router({
@@ -26,7 +27,16 @@ export default new Router({
       name: 'product',
       path: '/product/:id',
       component: Product
-    }
+    },
+    {
+      path: "/cart",
+      name: "cart",
+      component: Cart
+    },
+    // {
+    //   path: '/product/:id',
+    //   component: () => import(/* webpackChunkName: "productDetail" */ "./views/ProductPage.vue")
+    // }
     // Get id with: {{ $route.params.id }}
     // Example:
     // path: "/user/:username/post/:post_id"

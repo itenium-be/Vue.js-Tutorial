@@ -6,20 +6,20 @@
 
     <div class="product-info">
         <h1>
-          {{ product.name }}
+          {{ title }}
           <!-- eslint-disable-next-line vue/no-unused-vars -->
           <i v-for="i in averageReviewScore" class="fa fa-star" :key="i"></i>
         </h1>
 
-        <div>All reviews:</div>
+        <div v-if="product.reviews.length">All reviews:</div>
         <div v-for="j in product.reviews" :key="j.name+j.rating">
             <label>{{ j.name}}: </label>
             <i v-for="k in j.rating" class="fa fa-star" :key="k"></i>
         </div>
 
         <div>
-          <p v-if="product.inventory > 10">In Stock</p>
-          <p v-else-if="product.inventory">Almost sold out</p>
+          <p v-if="selectedVariant.inventory > 10">In Stock</p>
+          <p v-else-if="selectedVariant.inventory">Almost sold out</p>
           <p v-else>Out of Stock</p>
         </div>
 
@@ -28,10 +28,18 @@
 
         <button
           @click="addToCart"
-          :disabled="!product.inventory"
-          :class="['add-to-cart', product.inventory ? '' : 'disabledButton']"
+          :disabled="!selectedVariant.inventory"
+          :class="['add-to-cart', selectedVariant.inventory ? '' : 'disabledButton']"
         >
           Add to Cart
+        </button>
+
+        <button
+          @click="removeFromCart"
+          :disabled="cartLength === 0"
+          :class="['remove-from-cart', cartLength > 0 ? '' : 'disabledButton']"
+        >
+          Remove from cart
         </button>
 
         <div v-for="(variant, index) in product.variants"
@@ -59,17 +67,19 @@ import ProductReview from './ProductReview.vue';
 
 export default class Product extends Vue {
   @Prop({default: false}) private premium!: boolean;
+  @Prop() private cartLength!: number;
 
   product = {
     name: "Vue Socks",
     brand: "Vue",
+    price: 5,
     variants: [
-      {id: 1, color: "green"},
-      {id: 2, color: "blue"}
+      {id: 1, color: "green", inventory: 3},
+      {id: 2, color: "blue", inventory: 5}
     ],
     inventory: 3,
     reviews: []
-  }
+  };
 
   selectedVariantIndex = 0;
 
@@ -81,13 +91,27 @@ export default class Product extends Vue {
     if (!this.product.reviews.length) {
       return null;
     }
-    return Math.round(this.product.reviews.map(x => x.rating).reduce((a, c) => a + c, 0) / this.product.reviews.length);
+    const reviews = this.product.reviews as any;
+    const totalStars = reviews
+      .map((x: any) => x.rating)
+      .reduce((a: any, c: any) => a + c, 0);
+
+    return Math.round(totalStars / this.product.reviews.length);
+  }
+
+  get title() {
+      return `${this.product.name} ($${this.product.price})`;
   }
 
   addToCart() {
-    this.product.inventory--;
+    this.selectedVariant.inventory--;
+    this.$emit('add-to-cart', {product: this.product, variant: this.selectedVariant});
+  }
+
+  removeFromCart() {
+    this.product.inventory++;
     const selectedVariant = this.product.variants[this.selectedVariantIndex];
-    this.$emit('add-to-cart', {product: this.product, variant: selectedVariant});
+    this.$emit('remove-from-cart', {product: this.product, variant: selectedVariant})
   }
 
   addReview(review: any) {
@@ -147,6 +171,18 @@ button.add-to-cart {
   font-size: 14px;
   position: absolute;
   top: 85px;
+  right: 13px;
+}
+
+button.remove-from-cart {
+  border: none;
+  background-color: #F12321;
+  color: white;
+  height: 40px;
+  width: 100px;
+  font-size: 14px;
+  position: absolute;
+  top: 135px;
   right: 13px;
 } 
 
