@@ -11,7 +11,7 @@
           <i v-for="i in averageReviewScore" class="fa fa-star" :key="i"></i>
         </h1>
 
-        <div>All reviews:</div>
+        <div v-if="product.reviews">All reviews:</div>
         <div v-for="j in product.reviews" :key="j.name+j.rating">
             <label>{{ j.name}}: </label>
             <i v-for="k in j.rating" class="fa fa-star" :key="k"></i>
