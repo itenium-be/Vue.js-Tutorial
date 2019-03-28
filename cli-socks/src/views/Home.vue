@@ -1,6 +1,12 @@
 <template>
   <div>
-    <Product :premium="premium" @add-to-cart="updateCart" @remove-from-cart="removeFromCart" :cartLength="cart.length"></Product>
+    <Product v-for="product in products"
+             :key="product.brand"
+             :premium="premium"
+             :product="product"
+             @add-to-cart="updateCart"
+             @remove-from-cart="removeFromCart"
+             :cartLength="cart.length"></Product>
 
     <div class="cart">
       {{ cart.length }}
@@ -21,6 +27,10 @@ import Product from "../components/Product.vue";
 export default class Home extends Vue {
   premium = true;
   cart: string[] = [];
+
+  get products() {
+      return this.$store.state.products;
+  }
 
   updateCart(product: any) {
     console.log("Adding to cart:", product);
