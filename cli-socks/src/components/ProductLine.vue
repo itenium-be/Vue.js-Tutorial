@@ -1,6 +1,6 @@
 <template>
     <div>{{product.name}}
-        <router-link :to="{ name: 'product', params: { id: product.name }}">Link</router-link>
+        <router-link :to="{ name: 'product', params: { id: product.id }}">Link</router-link>
     </div>
 </template>
 

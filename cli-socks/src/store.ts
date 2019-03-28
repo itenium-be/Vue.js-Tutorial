@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 
 const productList = [{
+  id: 1,
   name: "Vue Socks",
   brand: "Vue",
   price: 5,
@@ -15,6 +16,7 @@ const productList = [{
   reviews: []
 },
 {
+  id: 2,
   name: "Angular Socks",
   brand: "Angular",
   price: 15,
@@ -25,6 +27,7 @@ const productList = [{
   reviews: []
 },
 {
+  id: 3,
   name: "npm Socks",
   brand: "npm",
   price: 3,
@@ -46,7 +49,7 @@ export default new Vuex.Store({
 
   },
   getters: {
-    
+
   },
 
   mutations: {
