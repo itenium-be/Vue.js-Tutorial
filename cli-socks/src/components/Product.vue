@@ -68,18 +68,7 @@ import ProductReview from './ProductReview.vue';
 export default class Product extends Vue {
   @Prop({default: false}) private premium!: boolean;
   @Prop() private cartLength!: number;
-
-  product = {
-    name: "Vue Socks",
-    brand: "Vue",
-    price: 5,
-    variants: [
-      {id: 1, color: "green", inventory: 3},
-      {id: 2, color: "blue", inventory: 5}
-    ],
-    inventory: 3,
-    reviews: []
-  };
+  @Prop() private product!: any;
 
   selectedVariantIndex = 0;
 
