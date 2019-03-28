@@ -68,7 +68,12 @@ import ProductReview from './ProductReview.vue';
 export default class Product extends Vue {
   @Prop({default: false}) private premium!: boolean;
   @Prop() private cartLength!: number;
-  @Prop() private product!: any;
+
+  get product(): any {
+    const prodName = this.$route.params.id;
+    console.log('prodName', prodName);
+    return this.$store.state.products.find((x: any) => x.id === prodName);
+  }
 
   selectedVariantIndex = 0;
 
