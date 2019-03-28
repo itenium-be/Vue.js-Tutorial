@@ -11,6 +11,12 @@
           <i v-for="i in averageReviewScore" class="fa fa-star" :key="i"></i>
         </h1>
 
+        <div v-if="product.reviews.length">All reviews:</div>
+        <div v-for="j in product.reviews" :key="j.name+j.rating">
+            <label>{{ j.name}}: </label>
+            <i v-for="k in j.rating" class="fa fa-star" :key="k"></i>
+        </div>
+
         <div>
           <p v-if="selectedVariant.inventory > 10">In Stock</p>
           <p v-else-if="selectedVariant.inventory">Almost sold out</p>
@@ -58,9 +64,10 @@ import ProductReview from './ProductReview.vue';
     ProductReview
   }
 })
+
 export default class Product extends Vue {
   @Prop({default: false}) private premium!: boolean;
-  @Prop() private cartLength: number;
+  @Prop() private cartLength!: number;
 
   product = {
     name: "Vue Socks",
@@ -84,7 +91,12 @@ export default class Product extends Vue {
     if (!this.product.reviews.length) {
       return null;
     }
-    return Math.round(this.product.reviews.reduce((a, c) => a + c, 0) / this.product.reviews.length);
+    const reviews = this.product.reviews as any;
+    const totalStars = reviews
+      .map((x: any) => x.rating)
+      .reduce((a: any, c: any) => a + c, 0);
+
+    return Math.round(totalStars / this.product.reviews.length);
   }
 
   get title() {
@@ -104,7 +116,7 @@ export default class Product extends Vue {
 
   addReview(review: any) {
     const reviews = this.product.reviews as any;
-    reviews.push(review.rating);
+    reviews.push(review);
   }
 }
 </script>
