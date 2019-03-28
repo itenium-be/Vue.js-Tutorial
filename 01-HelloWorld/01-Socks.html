@@ -35,7 +35,7 @@
 
           <!-- Events -->
           <button
-            v-on:click="cart++; inventory--"
+            v-on:click="addToCart"
             :disabled="!inventory"
             class="add-to-cart"
             :class="inventory ? '' : 'disabledButton'"

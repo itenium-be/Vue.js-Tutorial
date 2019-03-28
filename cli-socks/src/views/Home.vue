@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Product :premium="premium" @add-to-cart="updateCart"></Product>
+    <Product :premium="premium" @add-to-cart="updateCart" @remove-from-cart="removeFromCart" :cartLength="cart.length"></Product>
 
     <div class="cart">
       {{ cart.length }}
@@ -25,6 +25,11 @@ export default class Home extends Vue {
   updateCart(product: any) {
     console.log("Adding to cart:", product);
     this.cart.push(product);
+  }
+
+  removeFromCart(product: any) {
+    let index = this.cart.indexOf(product);
+    this.cart.splice(index);
   }
 }
 </script>
