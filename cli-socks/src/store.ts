@@ -9,21 +9,19 @@ const productList = [{
   brand: "Vue",
   price: 5,
   variants: [
-    {id: 1, color: "green"},
-    {id: 2, color: "blue"}
+    {id: 1, color: "green", inventory: 4},
+    {id: 2, color: "blue", inventory: 4}
   ],
-  inventory: 3,
   reviews: []
 },
 {
   name: "Angular Socks",
-  brand: "angular",
+  brand: "Angular",
   price: 15,
   variants: [
-    {id: 1, color: "red"},
-    {id: 2, color: "blue"}
+    {id: 1, color: "red", inventory: 4},
+    {id: 2, color: "blue", inventory: 4}
   ],
-  inventory: 3,
   reviews: []
 },
 {
@@ -31,9 +29,8 @@ const productList = [{
   brand: "npm",
   price: 3,
   variants: [
-    {id: 1, color: "red"},
+    {id: 1, color: "red", inventory: 4},
   ],
-  inventory: 3,
   reviews: []
 }];
 

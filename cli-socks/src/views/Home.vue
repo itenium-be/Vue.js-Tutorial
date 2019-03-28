@@ -1,7 +1,10 @@
 <template>
   <div>
-    <!--<Product :premium="premium" @add-to-cart="updateCart" @remove-from-cart="removeFromCart" :cartLength="cart.length"></Product>-->
-    <ProductLine v-for="k in products" :key="k.name" :product="k"></ProductLine>
+
+    <ProductLine v-for="product in products"
+             :key="product.brand"
+             :product="product"
+    ></ProductLine>
 
     <div class="cart">
       {{ cart.length }}
@@ -24,18 +27,11 @@ import { ProductModel } from '../models';
 })
 export default class Home extends Vue {
 
-  products: ProductModel[] = [];
   premium = true;
   cart: string[] = [];
 
-  constructor() {
-      super();
-      const product1 = new ProductModel();
-      product1.name = "product1";
-      const product2 = new ProductModel();
-      product2.name = "product2";
-      this.products.push(product1);
-      this.products.push(product2);
+  get products() {
+      return this.$store.state.products;
   }
 
   updateCart(product: any) {
