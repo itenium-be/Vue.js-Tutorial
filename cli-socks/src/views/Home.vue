@@ -1,12 +1,10 @@
 <template>
   <div>
-    <Product v-for="product in products"
+
+    <ProductLine v-for="product in products"
              :key="product.brand"
-             :premium="premium"
              :product="product"
-             @add-to-cart="updateCart"
-             @remove-from-cart="removeFromCart"
-             :cartLength="cart.length"></Product>
+    ></ProductLine>
 
     <div class="cart">
       {{ cart.length }}
@@ -18,13 +16,17 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Product from "../components/Product.vue";
+import ProductLine from "../components/ProductLine.vue";
+import { ProductModel } from '../models';
 
 @Component({
   components: {
-    Product
+    Product,
+    ProductLine
   }
 })
 export default class Home extends Vue {
+
   premium = true;
   cart: string[] = [];
 
