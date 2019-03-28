@@ -1,6 +1,6 @@
 Exercises
 =========
-Claim an exercise at https://github.com/itenium-be/Vue.js-Tutorial/issues
+[Claim an exercise](https://github.com/itenium-be/Vue.js-Tutorial/issues)
 
 
 1) Remove from cart
