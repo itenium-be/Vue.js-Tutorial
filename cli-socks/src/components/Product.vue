@@ -11,7 +11,7 @@
           <i v-for="i in averageReviewScore" class="fa fa-star" :key="i"></i>
         </h1>
 
-        <div>All reviews:</div>
+        <div v-if="product.reviews.length">All reviews:</div>
         <div v-for="j in product.reviews" :key="j.name+j.rating">
             <label>{{ j.name}}: </label>
             <i v-for="k in j.rating" class="fa fa-star" :key="k"></i>
@@ -67,7 +67,7 @@ import ProductReview from './ProductReview.vue';
 
 export default class Product extends Vue {
   @Prop({default: false}) private premium!: boolean;
-  @Prop() private cartLength: number;
+  @Prop() private cartLength!: number;
 
   product = {
     name: "Vue Socks",
@@ -91,7 +91,12 @@ export default class Product extends Vue {
     if (!this.product.reviews.length) {
       return null;
     }
-    return Math.round(this.product.reviews.map(x => x.rating).reduce((a, c) => a + c, 0) / this.product.reviews.length);
+    const reviews = this.product.reviews as any;
+    const totalStars = reviews
+      .map((x: any) => x.rating)
+      .reduce((a: any, c: any) => a + c, 0);
+
+    return Math.round(totalStars / this.product.reviews.length);
   }
 
   get title() {
