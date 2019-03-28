@@ -17,7 +17,7 @@ Keep track of inventory per color/variant.
 ---------
 A. Add validation: Name is required. Must accept the terms.  
 B. Display all reviews already submitted.  
-C. Turn the rating `select` into selectable stars.  
+C. Turn the rating `select` into ⭐⭐⭐⭐⭐.  
 C2. Allow for partial selection. (See Github issue for code snippets)
 
 
