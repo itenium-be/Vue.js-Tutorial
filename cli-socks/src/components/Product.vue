@@ -28,6 +28,14 @@
           Add to Cart
         </button>
 
+        <button
+          @click="removeFromCart"
+          :disabled="cartLength === 0"
+          :class="['remove-from-cart', cartLength > 0 ? '' : 'disabledButton']"
+        >
+          Remove from cart
+        </button>
+
         <div v-for="(variant, index) in product.variants"
             :key="variant.id"
             class="color-box"
@@ -52,6 +60,7 @@ import ProductReview from './ProductReview.vue';
 })
 export default class Product extends Vue {
   @Prop({default: false}) private premium!: boolean;
+  @Prop() private cartLength: number;
 
   product = {
     name: "Vue Socks",
@@ -85,6 +94,12 @@ export default class Product extends Vue {
   addToCart() {
     this.selectedVariant.inventory--;
     this.$emit('add-to-cart', {product: this.product, variant: this.selectedVariant});
+  }
+
+  removeFromCart() {
+    this.product.inventory++;
+    const selectedVariant = this.product.variants[this.selectedVariantIndex];
+    this.$emit('remove-from-cart', {product: this.product, variant: selectedVariant})
   }
 
   addReview(review: any) {
@@ -144,6 +159,18 @@ button.add-to-cart {
   font-size: 14px;
   position: absolute;
   top: 85px;
+  right: 13px;
+}
+
+button.remove-from-cart {
+  border: none;
+  background-color: #F12321;
+  color: white;
+  height: 40px;
+  width: 100px;
+  font-size: 14px;
+  position: absolute;
+  top: 135px;
   right: 13px;
 } 
 

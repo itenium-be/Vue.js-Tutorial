@@ -36,6 +36,7 @@ export default new Vuex.Store({
 // const productList = [{
 //   name: "Vue Socks",
 //   brand: "Vue",
+//   price: 5,
 //   variants: [
 //     {id: 1, color: "green"},
 //     {id: 2, color: "blue"}
@@ -45,7 +46,8 @@ export default new Vuex.Store({
 // },
 // {
 //   name: "Angular Socks",
-//   brand: "Angular",
+//   brand: "angular",
+//   price: 15,
 //   variants: [
 //     {id: 1, color: "red"},
 //     {id: 2, color: "blue"}
@@ -56,6 +58,7 @@ export default new Vuex.Store({
 // {
 //   name: "npm Socks",
 //   brand: "npm",
+//   price: 3,
 //   variants: [
 //     {id: 1, color: "red"},
 //   ],
