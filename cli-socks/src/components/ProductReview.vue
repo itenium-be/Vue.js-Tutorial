@@ -4,10 +4,10 @@
       <label>Name</label>
       <input v-model="name" @keydown.ctrl.v.prevent="blockPaste">
 
-      <div class="error" v-for="error in errors" :key="error">
-        * {{ error }}
-      </div>
- 
+      <ul class="error" v-for="error in errors" :key="error">
+        <li>{{error}}</li>
+      </ul>
+
       <label>Rating</label>
       <select v-model.number="rating">
         <option disabled value="">select</option>
@@ -45,10 +45,18 @@ export default class ProductReview extends Vue {
     this.errors = [];
     if (!this.rating) {
         this.errors.push('Please select a rating');
+    }
+    if (!this.name) {
+        this.errors.push('Please provide your name');
+    }
+    if (!this.acceptTerms) {
+        this.errors.push('Please accept the terms');
+    }
+    if (this.errors.length) {
         return;
     }
 
-    const review = {name: this.name, rating: this.rating}
+    const review = {name: this.name, rating: this.rating};
     console.log('Submitting', review);
     this.$emit('add-review', review);
   }
@@ -72,7 +80,7 @@ h3 {
 }
 
 input:not([type=checkbox]) {
-  width: 100%;  
+  width: 100%;
   height: 25px;
   margin-bottom: 10px;
 }
