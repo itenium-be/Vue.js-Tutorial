@@ -1,9 +1,6 @@
 Vue.js Technical Session
 ========================
 
-TODO: run linter on all files
-
-
 # Prerequisites <small>(optional)</small>
 
 
