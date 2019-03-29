@@ -1,21 +1,18 @@
+<!-- Product Review Form -->
 <template>
     <form class="review-form" @submit.prevent="onSubmit">
       <h3>Add Review</h3>
       <label>Name</label>
-      <input v-model="name" @keydown.ctrl.v.prevent="blockPaste">
+      <input v-model="review.name">
 
       <div class="error" v-for="error in errors" :key="error">
         * {{ error }}
       </div>
- 
+
       <label>Rating</label>
-      <select v-model.number="rating">
+      <select v-model.number="review.rating">
         <option disabled value="">select</option>
-        <option>5</option>
-        <option>4</option>
-        <option>3</option>
-        <option>2</option>
-        <option>1</option>
+        <option v-for="i in 5" :key="`option-${i}`">{{ i }}</option>
       </select>
 
       <br>
@@ -33,28 +30,39 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { State, Getter, Action, Mutation, namespace } from 'vuex-class';
+import { ProductReviewModel } from '../models/ProductModels';
+
 
 @Component
 export default class ProductReview extends Vue {
-  name = null;
-  rating = '';
+  @Prop() productId!: number;
+
   acceptTerms = false;
+
+  review: ProductReviewModel;
   errors: string[] = [];
+
+  constructor() {
+    super();
+    this.review = {
+      name: '',
+      rating: 0,
+      fullReview: '',
+    };
+  }
+
 
   onSubmit() {
     this.errors = [];
-    if (!this.rating) {
-        this.errors.push('Please select a rating');
-        return;
+    if (!this.review.rating) {
+      this.errors.push('Please select a rating');
+      return;
     }
 
-    const review = {name: this.name, rating: this.rating}
+    const review = {productId: this.productId, review: this.review};
     console.log('Submitting', review);
     this.$emit('add-review', review);
-  }
-
-  blockPaste() {
-    console.log('Control + V is not allowed!');
   }
 }
 </script>
@@ -65,6 +73,7 @@ export default class ProductReview extends Vue {
   width: 175px;
   padding: 5px;
   margin: 0px;
+  margin-top: 25px;
 }
 
 h3 {
@@ -72,7 +81,7 @@ h3 {
 }
 
 input:not([type=checkbox]) {
-  width: 100%;  
+  width: 100%;
   height: 25px;
   margin-bottom: 10px;
 }

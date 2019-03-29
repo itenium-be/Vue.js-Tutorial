@@ -37,5 +37,5 @@ A. Put the `Product.vue` product properties in `store.ts` in a products array.
 B. Turn product into a `@Prop() product!: any` of `Product.vue`.  
 C. On the main page, loop over the products and display them.  
 D. Display a list of the `ProductLine` instead and a button to go to the detail page.  
-E. Create a new route to go to a `ProductDetail` page.
+E. Create a new route to go to a `ProductDetail` page.  
 F. The `cart` is now defined in `Home.vue`. Should probably move this to the store aswell?  

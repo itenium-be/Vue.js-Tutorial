@@ -4,7 +4,7 @@
       <h1>CLI Socks</h1>
 
       <div class="links">
-        <router-link to="/">Home</router-link> |
+        <router-link to="/">Socks</router-link> |
         <router-link to="/counter" title="Vuex example">Counter</router-link>
       </div>
     </div>

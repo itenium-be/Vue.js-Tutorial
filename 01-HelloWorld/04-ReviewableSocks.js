@@ -17,18 +17,14 @@ Vue.component('product-review', {
       <div class="error" v-for="error in errors" :key="error">
         * {{ error }}
       </div>
- 
+
       <label>Rating</label>
       <select v-model.number="rating">
         <!-- Other modifiers: -->
         <!-- .lazy => Sync on change event -->
         <!-- .trim => Strip whitespace -->
         <option disabled value="">select</option>
-        <option>5</option>
-        <option>4</option>
-        <option>3</option>
-        <option>2</option>
-        <option>1</option>
+        <option v-for="i in 5" :key="i">{{ i }}</option>
       </select>
 
       <br>
@@ -94,15 +90,15 @@ Vue.component('product-review', {
     console.log('product-review beforeDestroy');
   },
 });
- 
+
 // Validation is not built in:
 // https://github.com/vuelidate/vuelidate
 // https://github.com/baianat/vee-validate
- 
- 
- 
 
- 
+
+
+
+
 Vue.component('product', {
   props: {
     premium: {type: Boolean, required: true, default: false}
@@ -112,22 +108,22 @@ Vue.component('product', {
       <div class="product-image">
         <img :src="image">
       </div>
- 
+
       <div class="product-info">
           <h1>
             {{ product }}
             <i v-for="i in averageReviewScore" class="fa fa-star"></i>
           </h1>
- 
+
           <div>
             <p v-if="inventory > 10">In Stock</p>
             <p v-else-if="inventory">Almost sold out</p>
             <p v-else>Out of Stock</p>
           </div>
- 
+
           <p v-if="premium">FREE Shipping</p>
           <p v-else>Shipping: $4.99</p>
- 
+
           <!-- Mouse modifiers: left, middle, right -->
           <button
             @click.right.prevent="addToCart"
@@ -136,7 +132,7 @@ Vue.component('product', {
           >
             Add to Cart
           </button>
- 
+
           <div v-for="(variant, index) in variants"
               :key="variant.id"
               class="color-box"

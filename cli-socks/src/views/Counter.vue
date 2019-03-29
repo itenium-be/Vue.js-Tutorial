@@ -1,3 +1,4 @@
+<!-- Basic Vuex example -->
 <template>
   <div class="counter">
     <h1>Vuex Counter</h1>
@@ -17,9 +18,11 @@ import { State, Getter, Action, Mutation, namespace } from 'vuex-class';
 @Component
 export default class Counter extends Vue {
   get count(): number {
+    // Select state directly from store
     return this.$store.state.count;
   }
 
+  // Or use a getter defined in store.ts
   @Getter countAlias!: number;
 
 

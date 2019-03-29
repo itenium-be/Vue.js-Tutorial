@@ -1,3 +1,4 @@
+<!-- Complete Product Detail -->
 <template>
 <div class="product">
     <div class="product-image">
@@ -6,7 +7,7 @@
 
     <div class="product-info">
         <h1>
-          {{ title }}
+          {{ product.name }}
           <!-- eslint-disable-next-line vue/no-unused-vars -->
           <i v-for="i in averageReviewScore" class="fa fa-star" :key="i"></i>
         </h1>
@@ -32,18 +33,26 @@
             :key="variant.id"
             class="color-box"
             :class="{active: selectedVariantIndex === index}"
-            :style="{backgroundColor: variant.color}"
+            :style="{backgroundColor: variant.fancyColor}"
             @mouseover="selectedVariantIndex = index"
         ></div>
 
-        <ProductReview @add-review="addReview"></ProductReview>
+        <ProductReview @add-review="addReview" :product-id="product.id"></ProductReview>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { State, Getter, Action, Mutation, namespace } from 'vuex-class';
 import ProductReview from './ProductReview.vue';
+import { ProductModel, ProductVariantModel, ProductReviewModel } from '../models/ProductModels';
+
+export interface ProductReviewPostModel {
+	productId: number;
+	review: ProductReviewModel;
+}
+
 
 @Component({
   components: {
@@ -51,47 +60,52 @@ import ProductReview from './ProductReview.vue';
   }
 })
 export default class Product extends Vue {
-  @Prop({default: false}) private premium!: boolean;
+  // Prop() decorator binds the field to the store
+  // {default: false} argument is optional
+  // premium!: The exclamation mark is TypeScript annotation telling the compiler
+  //           the value will be initialized (to avoid ts warning)
+  @Prop({default: false}) premium!: boolean;
 
-  product = {
-    name: "Vue Socks",
-    brand: "Vue",
-    price: 5,
-    variants: [
-      {id: 1, color: "green"},
-      {id: 2, color: "blue"}
-    ],
-    inventory: 3,
-    reviews: []
-  };
+  @Prop() product!: ProductModel;
 
   selectedVariantIndex = 0;
 
-  get selectedVariant(): any {
+  get selectedVariant(): ProductVariantModel {
     return this.product.variants[this.selectedVariantIndex];
   }
 
-  get averageReviewScore(): number | null {
-    if (!this.product.reviews.length) {
-      return null;
+  get reviews(): ProductReviewPostModel[] {
+    return this.tempReviews;
+  }
+
+  get averageReviewScore(): number {
+    if (!this.reviews.length) {
+      return 0;
     }
-    return Math.round(this.product.reviews.reduce((a, c) => a + c, 0) / this.product.reviews.length);
+
+    const totalStars = this.reviews
+      .map((a: ProductReviewPostModel) => a.review.rating)
+      .reduce((a: number, c: number) => a + c, 0);
+
+    return Math.round(totalStars / this.reviews.length);
   }
 
-  get title() {
-      return `${this.product.name} ($${this.product.price})`;
-  }
-
-  addToCart() {
+  addToCart(): void {
     this.product.inventory--;
     const selectedVariant = this.product.variants[this.selectedVariantIndex];
-    this.$emit('add-to-cart', {product: this.product, variant: selectedVariant});
+    this.$emit('add-to-cart', {productId: this.product.id, variantId: selectedVariant.id});
   }
 
-  addReview(review: any) {
+  addReview(review: ProductReviewPostModel): void {
     const reviews = this.product.reviews as any;
-    reviews.push(review.rating);
+    // TODO: reviews is a @Prop() and is readonly.
+    // Mutate the product in the store!
+    // reviews.push(review.rating);
+
+    this.tempReviews.push(review);
   }
+
+  tempReviews: ProductReviewPostModel[] = [];
 }
 </script>
 
@@ -123,6 +137,10 @@ img {
 .product-info {
   margin-top: 10px;
   width: 50%;
+
+  h1 {
+    width: calc(100% - 100px);
+  }
 }
 
 .color-box {
@@ -146,7 +164,7 @@ button.add-to-cart {
   position: absolute;
   top: 85px;
   right: 13px;
-} 
+}
 
 .disabledButton {
   background-color: #d8d8d8 !important;

@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
+import SocksListing from "./views/SocksListing.vue";
+import Cart from "./views/Cart.vue";
+import Product from "./components/Product.vue";
 
 Vue.use(Router);
 
@@ -10,20 +12,27 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: Home
+      name: "socks-listing",
+      component: SocksListing
     },
     {
       path: "/counter",
-      name: "Vuex Counter",
+      name: "vuex-counter",
       // route level code-splitting
       // this generates a separate chunk (counter.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "counter" */ "./views/Counter.vue")
     },
+    {
+      path: "/cart",
+      name: "cart",
+      component: Cart
+    }
+
+
     // {
     //   path: '/product/:id',
-    //   component: () => import(/* webpackChunkName: "productDetail" */ "./views/ProductPage.vue")
+    //   component: Product
     // }
     // Get id with: {{ $route.params.id }}
     // Example:
