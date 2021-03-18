@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import Product from "./components/Product.vue";
 
 Vue.use(Router);
 
@@ -21,10 +22,11 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "counter" */ "./views/Counter.vue")
     },
-    // {
-    //   path: '/product/:id',
-    //   component: () => import(/* webpackChunkName: "productDetail" */ "./views/ProductPage.vue")
-    // }
+    {
+      name: 'product',
+      path: '/product/:id',
+      component: Product
+    }
     // Get id with: {{ $route.params.id }}
     // Example:
     // path: "/user/:username/post/:post_id"

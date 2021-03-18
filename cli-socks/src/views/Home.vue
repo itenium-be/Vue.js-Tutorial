@@ -1,12 +1,7 @@
 <template>
   <div>
-    <Product v-for="product in products"
-             :key="product.brand"
-             :premium="premium"
-             :product="product"
-             @add-to-cart="updateCart"
-             @remove-from-cart="removeFromCart"
-             :cartLength="cart.length"></Product>
+    <!--<Product :premium="premium" @add-to-cart="updateCart"></Product>-->
+    <ProductLine v-for="k in products" :key="k.name" :product="k"></ProductLine>
 
     <div class="cart">
       {{ cart.length }}
@@ -18,13 +13,18 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Product from "../components/Product.vue";
+import ProductLine from "../components/ProductLine.vue";
+import { ProductModel } from '../models';
 
 @Component({
   components: {
-    Product
+    Product,
+    ProductLine
   }
 })
 export default class Home extends Vue {
+
+  products: ProductModel[] = [];
   premium = true;
   cart: string[] = [];
 
