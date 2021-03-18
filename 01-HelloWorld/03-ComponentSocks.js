@@ -1,4 +1,5 @@
 const comp = Vue.component('product', {
+  // https://vuejs.org/v2/guide/components-props.html
   // Props with validation
   props: {
     premium: {type: Boolean, required: true, default: false},
