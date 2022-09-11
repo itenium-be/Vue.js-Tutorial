@@ -34,7 +34,7 @@
           </button>
 
           <div class="cart">
-            {{cart}}
+            {{ cart }}
             <i class="fas fa-shopping-cart"></i>
           </div>
 
@@ -76,18 +76,19 @@
 
 
 <script type="text/javascript">
-  const vm = new Vue({
-    el: '#app',
-    data: {
-      product: 'Socks',
-      selectedVariantIndex: 0,
-      variants: [
-        {id: 1, color: 'green'},
-        {id: 2, color: 'blue'},
-        {id: 3, color: 'red', soldOut: true},
-      ],
-      inventory: 3,
-      cart: 0
+  Vue.createApp({
+    data() {
+      return {
+        product: 'Socks',
+        selectedVariantIndex: 0,
+        variants: [
+          {id: 1, color: 'green'},
+          {id: 2, color: 'blue'},
+          {id: 3, color: 'red', soldOut: true},
+        ],
+        inventory: 3,
+        cart: 0
+      };
     },
     methods: {
       setSelectedVariant(variant, index) {
@@ -105,8 +106,7 @@
         return `./assets/socks-${color}.jpg`;
       }
     }
-  });
-  console.log('Modify data directly from the console with `vm.product = "Shoes";`');
+  }).mount('#app');
 </script>
 
 

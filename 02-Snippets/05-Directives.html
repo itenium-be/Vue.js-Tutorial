@@ -2,11 +2,12 @@
   <head>
     <script src="https://unpkg.com/vue"></script>
     <title>Directives</title>
+    <!-- https://vuejs.org/guide/reusability/custom-directives.html -->
   </head>
   <body>
     <div id="app">
       <h1>Directives</h1>
-      
+
       <input v-focus>
 
       <alert-box></alert-box>
@@ -16,38 +17,27 @@
 
 
 <script type="text/javascript">
+  const app = Vue.createApp({});
+
   // Register a global custom directive called `v-focus`
-  Vue.directive('focus', {
-    inserted: function (el) {
+  app.directive('focus', {
+    mounted: function(el) {
       el.focus();
     },
-
-    // bind() {}, // Called once, when the directive is first bound
-    // inserted() {}, // Called when the el has been inserted into its parent
-    // update() {},
-    // componentUpdated() {},
-    // unbind() {},
   });
 
-
-  
-  Vue.component('alert-box', {
-    template: `
-      <p v-alert>Black Alert!!</p>
-    `,
+  app.component('alert-box', {
+    template: `<p v-alert>Black Alert!!</p>`,
     directives: {
-        alert: {
-            inserted(el) {
-                // el.focus();
-                console.log('Inserted el', el);
-            }
+      alert: {
+        beforeMount(el) {
+          console.log('beforeMount el', el);
         }
+      }
     }
   });
 
-  const vm = new Vue({
-    el: '#app',
-  });
+  app.mount("#app");
 </script>
 
 

@@ -32,13 +32,13 @@
 
 
 <script type="text/javascript">
-  const vm = new Vue({
-    el: '#app',
-    data: {
-      product: 'Socks',
-    },
-  });
-  console.log('Modify data directly from the console with `vm.product = "Shoes";`');
+  Vue.createApp({
+    data() {
+      return {
+        product: 'Socks',
+      }
+    }
+  }).mount('#app');
 </script>
 
 

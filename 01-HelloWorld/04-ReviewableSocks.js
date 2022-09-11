@@ -1,4 +1,21 @@
-Vue.component('product-review', {
+const app = Vue.createApp({
+  data() {
+    return {
+      premium: true,
+      cart: []
+    };
+  },
+  methods: {
+    updateCart(product) {
+      console.log('Adding to cart:', product);
+      this.cart.push(product);
+    }
+  }
+});
+
+
+
+app.component('product-review', {
   template: `
     <form class="review-form" @submit.prevent="onSubmit">
       <!-- Modifiers: -->
@@ -21,7 +38,7 @@ Vue.component('product-review', {
       <label>Rating</label>
       <select v-model.number="rating">
         <!-- Other modifiers: -->
-        <!-- .lazy => Sync on change event -->
+        <!-- .lazy => Sync on 'change' event instead of 'input' event -->
         <!-- .trim => Strip whitespace -->
         <option disabled value="">select</option>
         <option v-for="i in 5" :key="i">{{ i }}</option>
@@ -99,7 +116,7 @@ Vue.component('product-review', {
 
 
 
-Vue.component('product', {
+app.component('product', {
   props: {
     premium: {type: Boolean, required: true, default: false}
   },
@@ -112,7 +129,7 @@ Vue.component('product', {
       <div class="product-info">
           <h1>
             {{ product }}
-            <i v-for="i in averageReviewScore" class="fa fa-star"></i>
+            <i v-for="i in averageReviewScore" class="fa fa-star" />
           </h1>
 
           <div>
@@ -181,16 +198,6 @@ Vue.component('product', {
   }
 })
 
-const vm = new Vue({
-  el: '#app',
-  data: {
-    premium: true,
-    cart: []
-  },
-  methods: {
-    updateCart(product) {
-      console.log('Adding to cart:', product);
-      this.cart.push(product);
-    }
-  }
-});
+
+
+app.mount("#app");

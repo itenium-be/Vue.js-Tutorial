@@ -16,21 +16,23 @@
 
 
 <script type="text/javascript">
-  Vue.component('custom-input', {
-    props: ['value'],
-    template: `<input :value="value" @input="$emit('input', $event.target.value)">`
-  })
-
-  const vm = new Vue({
-    el: '#app',
-    data: {
-      searchText: ''
+  const app = Vue.createApp({
+    data() {
+      return {searchText: ''};
     },
   });
 
+  app.component('custom-input', {
+    props: ['modelValue'],
+    template: `<input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)">`
+  });
+
+  app.mount("#app");
+
+
 
   // Use a different prop/event for value/input:
-  // Vue.component('base-checkbox', {
+  // app.component('base-checkbox', {
   //   model: {
   //     prop: 'checked',
   //     event: 'change'
@@ -45,7 +47,7 @@
   //       v-on:change="$emit('change', $event.target.checked)"
   //     >
   //   `
-  // })
+  // });
 </script>
 
 

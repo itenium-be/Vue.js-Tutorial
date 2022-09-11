@@ -1,4 +1,22 @@
-const comp = Vue.component('product', {
+const app = Vue.createApp({
+  data() {
+    return {
+      premium: true, // Premium users get free shipping
+      cart: []
+    };
+  },
+  methods: {
+    updateCart(product) {
+      console.log('Adding to cart:', product);
+      this.cart.push(product);
+    }
+  }
+});
+
+
+
+
+app.component('product', {
   // https://vuejs.org/v2/guide/components-props.html
   // Props with validation
   props: {
@@ -13,14 +31,19 @@ const comp = Vue.component('product', {
   },
   // Without validation
   // props: ['premium'],
+
+  // Encouraged to define events
+  emits: ['add-to-cart'],
+
   template: `
-    <!-- Must have single root element -->
+    <!-- 'class="main-prod"' will only be applied if there is a single root element -->
+    <!-- There will be a bunch of warnings in the console if you do on multiple roots -->
     <div class="product">
       <div class="product-image">
         <img :src="image">
       </div>
       <div class="product-info">
-        <h1 v-text="product"></h1>
+        <h1 v-text="product" />
 
         <p v-if="premium" v-html="'<b>FREE Shipping</b>'"></p>
         <p v-else>Shipping: $4.99</p>
@@ -40,8 +63,7 @@ const comp = Vue.component('product', {
     </div>
   `,
   data() {
-    // data is a function inside a Vue.component()
-    // Do return a new object reference each time.
+    // Return a new object reference each time.
     return {
       product: 'Socks',
       selectedVariantIndex: 0,
@@ -77,24 +99,4 @@ const comp = Vue.component('product', {
 });
 
 
-
-
-
-
-
-
-
-
-const vm = new Vue({
-  el: '#app',
-  data: {
-    premium: true,
-    cart: []
-  },
-  methods: {
-    updateCart(product) {
-      console.log('Adding to cart:', product);
-      this.cart.push(product);
-    }
-  }
-});
+app.mount("#app");

@@ -14,7 +14,6 @@
         </template>
 
         Something bad happened.
-        <!-- Could put default slot into: v-slot:default -->
       </alert-box>
 
     </div>
@@ -23,7 +22,9 @@
 
 
 <script type="text/javascript">
-  Vue.component('alert-box', {
+  const app = Vue.createApp({});
+
+  app.component('alert-box', {
     template: `
       <div class="demo-alert-box">
         <strong><slot name="title">Error!</slot></strong>
@@ -38,9 +39,7 @@
     }
   });
 
-  const vm = new Vue({
-    el: '#app',
-  });
+  app.mount("#app");
 </script>
 
 

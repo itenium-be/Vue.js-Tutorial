@@ -1,11 +1,15 @@
 Vue.js Technical Session
 ========================
 
+State Management: Vuex -> Pinia
+
 # Prerequisites <small>(optional)</small>
+
+Node 16.10.0
 
 
 - Install the Chrome [Vue.js devtools](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=en)
-- Install the Visual Studio Code [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) extension
+- Install the Visual Studio Code [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) extension
 - Install the Visual Studio Code [Vue Inline Template](https://marketplace.visualstudio.com/items?itemName=faisalhakim47.vue-inline-template) extension
 
 
@@ -21,7 +25,7 @@ npx http-server
 
 # cli-socks
 
-Converted `01-HelloWorld` to a with Vue CLI generated "full blown" application
+Converted `01-HelloWorld` to a with Vue CLI **Vite** generated "full blown" application
 (Routing Vuex, SCSS, TypeScript, ...)
 
 ## Installation
@@ -30,7 +34,7 @@ cd cli-socks
 npm install
 ```
 
-ATTN: Some Webstorm attendees needed to do an additioan `npm install node-sass`.
+ATTN: Some Webstorm attendees needed to do an additional `npm install node-sass`.
 As always with npm, read the error messages :)
 
 
@@ -43,11 +47,6 @@ create a PR once ready.
 npm run serve
 ```
 
-## Common Issues
-
-Create models so that the typescript issues go away...
-(now need to do `const x = state.products as any`)
-
 
 # Not Covered
 
@@ -56,14 +55,16 @@ Create models so that the typescript issues go away...
 Some code examples on slots, mixins, directives, filters, ...
 
 
-## Vue CLI
+## Vue CLI -> Vite
+
+Scaffold projects in Vue, React, ...
 
 ```
-npm install -g @vue/cli
-
-vue --version
-vue create cli-socks
+npm create vite@latest
 ```
+
+VitePress: static website generator
+
 
 ## Testing
 
