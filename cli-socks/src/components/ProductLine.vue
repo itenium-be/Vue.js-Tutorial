@@ -1,4 +1,16 @@
 <!-- Smaller Product info display -->
+<script setup lang="ts">
+import { ProductModel, ProductVariantModel, ProductReviewModel } from '../models/ProductModels';
+
+interface Props {
+  product: ProductModel
+}
+
+const props = withDefaults(defineProps<Props>(), {});
+</script>
+
+
+
 <template>
 <div class="product">
     <div class="product-info">
@@ -9,18 +21,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue } from "vue-class-component";
-import { Prop } from "vue-property-decorator";
-import { ProductModel, ProductVariantModel, ProductReviewModel } from '../models/ProductModels';
 
-
-export default class ProductLine extends Vue {
-  @Prop() product!: ProductModel;
-
-
-}
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">

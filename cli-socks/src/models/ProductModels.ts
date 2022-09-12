@@ -20,3 +20,9 @@ export interface ProductReviewModel {
   rating: number;
   fullReview: string;
 }
+
+
+export interface ProductReviewPostModel {
+  productId: number;
+  review: ProductReviewModel;
+}

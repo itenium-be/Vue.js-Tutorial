@@ -1,4 +1,37 @@
 <!-- Product Review Form -->
+
+<script lang="ts">
+import { defineComponent, ref, reactive } from 'vue';
+import { ProductReviewModel } from '../models/ProductModels';
+
+export default defineComponent({
+  name: 'ProductReview',
+  props: ['productId'],
+  emits: ['add-review'],
+  setup(props, { emit }) {
+    const acceptTerms = ref(false);
+    const review = reactive<ProductReviewModel>({name: '', rating: 0, fullReview: ''});
+    const errors = ref<string[]>([]);
+
+    function onSubmit() {
+      errors.value = [];
+      if (!review.rating) {
+        errors.value.push('Please select a rating');
+        return;
+      }
+
+      const postReview = {productId: props.productId, review};
+      console.log('Submitting', review);
+      emit('add-review', postReview);
+    }
+
+    return {acceptTerms, review, errors, onSubmit};
+  },
+});
+</script>
+
+
+
 <template>
     <form class="review-form" @submit.prevent="onSubmit">
       <h3>Add Review</h3>
@@ -28,43 +61,7 @@
     </form>
 </template>
 
-<script lang="ts">
-import { Vue } from "vue-class-component";
-import { Prop } from "vue-property-decorator";
-import { ProductReviewModel } from '../models/ProductModels';
 
-
-export default class ProductReview extends Vue {
-  @Prop() productId!: number;
-
-  acceptTerms = false;
-
-  review: ProductReviewModel;
-  errors: string[] = [];
-
-  constructor() {
-    super();
-    this.review = {
-      name: '',
-      rating: 0,
-      fullReview: '',
-    };
-  }
-
-
-  onSubmit() {
-    this.errors = [];
-    if (!this.review.rating) {
-      this.errors.push('Please select a rating');
-      return;
-    }
-
-    const review = {productId: this.productId, review: this.review};
-    console.log('Submitting', review);
-    this.$emit('add-review', review);
-  }
-}
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">

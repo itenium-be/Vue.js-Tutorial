@@ -1,8 +1,63 @@
 <!-- Complete Product Detail -->
+<script lang="ts">
+import ProductReview from './ProductReview.vue';
+import { ProductModel, ProductVariantModel, ProductReviewModel, ProductReviewPostModel } from '../models/ProductModels';
+import { defineComponent, reactive, ref, computed } from 'vue';
+
+export default defineComponent({
+  name: 'Products',
+  props: ['premium', 'product'],
+  emits: ['add-to-cart'],
+  setup(props, { emit }) {
+    const reviews = reactive([]);
+    const selectedVariantIndex = ref(0);
+    const selectedVariant = computed(() => props.product.variants[selectedVariantIndex.value]);
+
+    function getImageSource(): string {
+      return new URL(`../assets/socks-${props.product.brand}-${selectedVariant.value.color}.jpg`, import.meta.url).href;
+    }
+
+    function averageReviewScore(): number {
+      if (!props.product.reviews.length) {
+        return 0;
+      }
+
+      const totalStars = props.product.reviews
+        .map((a: ProductReviewPostModel) => a.review.rating)
+        .reduce((a: number, c: number) => a + c, 0);
+
+      return Math.round(totalStars / reviews.length);
+    }
+
+    function addToCart(): void {
+      props.product.inventory--;
+      const selectedVariant = props.product.variants[selectedVariantIndex.value];
+      emit('add-to-cart', {productId: props.product.id, variantId: selectedVariant.id});
+    }
+
+    function addReview(review: ProductReviewPostModel): void {
+      const reviews = props.product.reviews;
+      // TODO: reviews is a prop and is readonly.
+      // Mutate the product in the store or work with an event!
+      // reviews.push(review.rating);
+    }
+
+    return {
+      reviews, selectedVariantIndex,
+      getImageSource, averageReviewScore, addToCart, addReview
+    };
+  },
+  components: {
+    ProductReview
+  }
+});
+</script>
+
+
 <template>
 <div class="product">
     <div class="product-image">
-      <img :src="require(`@/assets/socks-${product.brand}-${selectedVariant.color}.jpg`)">
+      <img :src="getImageSource()">
     </div>
 
     <div class="product-info">
@@ -42,67 +97,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue } from "vue-class-component";
-import { Prop } from "vue-property-decorator";
-import ProductReview from './ProductReview.vue';
-import { ProductModel, ProductVariantModel, ProductReviewModel } from '../models/ProductModels';
 
-export interface ProductReviewPostModel {
-	productId: number;
-	review: ProductReviewModel;
-}
-
-
-export default class Product extends Vue {
-  // Prop() decorator binds the field to the store
-  // {default: false} argument is optional
-  // premium!: The exclamation mark is TypeScript annotation telling the compiler
-  //           the value will be initialized (to avoid ts warning)
-  @Prop({default: false}) premium!: boolean;
-
-  @Prop() product!: ProductModel;
-
-  selectedVariantIndex = 0;
-
-  get selectedVariant(): ProductVariantModel {
-    return this.product.variants[this.selectedVariantIndex];
-  }
-
-  get reviews(): ProductReviewPostModel[] {
-    return this.tempReviews;
-  }
-
-  get averageReviewScore(): number {
-    if (!this.reviews.length) {
-      return 0;
-    }
-
-    const totalStars = this.reviews
-      .map((a: ProductReviewPostModel) => a.review.rating)
-      .reduce((a: number, c: number) => a + c, 0);
-
-    return Math.round(totalStars / this.reviews.length);
-  }
-
-  addToCart(): void {
-    this.product.inventory--;
-    const selectedVariant = this.product.variants[this.selectedVariantIndex];
-    this.$emit('add-to-cart', {productId: this.product.id, variantId: selectedVariant.id});
-  }
-
-  addReview(review: ProductReviewPostModel): void {
-    const reviews = this.product.reviews;
-    // TODO: reviews is a @Prop() and is readonly.
-    // Mutate the product in the store!
-    // reviews.push(review.rating);
-
-    this.tempReviews.push(review);
-  }
-
-  tempReviews: ProductReviewPostModel[] = [];
-}
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">

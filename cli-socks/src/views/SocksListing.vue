@@ -1,6 +1,44 @@
+<script lang="ts">
+import Product from "../components/Product.vue";
+import { ProductModel } from "../models/ProductModels";
+import { ref, reactive, computed } from 'vue';
+
+export default {
+  setup(props, context) {
+    const premium = ref(true);
+    const computedField = computed(() => premium.value ? 'PREMIUM TIER' : 'FREE TIER');
+    const cart: string[] = reactive([]);
+    const product: ProductModel = reactive({
+      id: 1,
+      name: "Vue Socks",
+      brand: "Vue",
+      price: 5,
+      variants: [
+        {id: 1, color: "green", fancyColor: "#42AF7C"},
+        {id: 2, color: "blue", fancyColor: "#27384F"}
+      ],
+      inventory: 3,
+      reviews: []
+    });
+
+    function updateCart(product: string): void {
+      console.log("Adding to cart:", product);
+      cart.push(product);
+    }
+
+    return {
+      premium, cart, product, updateCart
+    };
+  },
+  components: {
+    Product,
+  }
+}
+</script>
+
+
 <template>
   <div>
-
 
     <Product
       :premium="premium"
@@ -19,37 +57,3 @@
 
   </div>
 </template>
-
-<script lang="ts">
-import { Vue } from "vue-class-component";
-import Product from "../components/Product.vue";
-import { ProductModel } from "../models/ProductModels";
-
-
-export default class SocksListing extends Vue {
-  premium = true;
-
-
-  cart: string[] = [];
-
-
-  product = {
-    id: 1,
-    name: "Vue Socks",
-    brand: "Vue",
-    price: 5,
-    variants: [
-      {id: 1, color: "green", fancyColor: "#42AF7C"},
-      {id: 2, color: "blue", fancyColor: "#27384F"}
-    ],
-    inventory: 3,
-    reviews: []
-  };
-
-
-  updateCart(product: string): void {
-    console.log("Adding to cart:", product);
-    this.cart.push(product);
-  }
-}
-</script>
