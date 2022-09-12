@@ -3,6 +3,7 @@
 import ProductReview from './ProductReview.vue';
 import { ProductModel, ProductVariantModel, ProductReviewModel, ProductReviewPostModel } from '../models/ProductModels';
 import { defineComponent, reactive, ref, computed } from 'vue';
+// import { useSocksStore } from '@/stores/socks';
 
 export default defineComponent({
   name: 'Products',
@@ -39,7 +40,8 @@ export default defineComponent({
       const reviews = props.product.reviews;
       // TODO: reviews is a prop and is readonly.
       // Mutate the product in the store or work with an event!
-      // reviews.push(review.rating);
+      // const store = useSocksStore();
+      // store.addReview();
     }
 
     return {

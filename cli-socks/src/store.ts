@@ -90,9 +90,16 @@ export const useSocksStore = defineStore('socks', () => {
   const cart: ProductModel[] = [];
   const products = productList;
 
-  function addToCart(state: SocksStore, product: ProductModel) {
-    state.cart.push(product);
+  function addToCart(product: ProductModel) {
+    cart.push(product);
   }
 
-  return { premium, cart, products, addToCart };
+  function addReview() {
+    console.log('addReview in store!!');
+  }
+
+  return {
+    premium, cart, products,
+    addToCart, addReview,
+  };
 });
