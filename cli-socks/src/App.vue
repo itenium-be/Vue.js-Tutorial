@@ -5,7 +5,8 @@
 
       <div class="links">
         <router-link to="/">Socks</router-link> |
-        <router-link to="/counter" title="Vuex example">Counter</router-link>
+        <router-link to="/counter" title="Pinia example">Counter</router-link> |
+        <router-link to="/cart" title="Cart summary">Cart</router-link>
       </div>
     </div>
 

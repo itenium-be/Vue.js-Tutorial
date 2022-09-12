@@ -1,34 +1,31 @@
 import Vue from "vue";
-import Router from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import SocksListing from "./views/SocksListing.vue";
 import Cart from "./views/Cart.vue";
 import Product from "./components/Product.vue";
 
-Vue.use(Router);
-
-export default new Router({
-  mode: "history",
-  base: process.env.BASE_URL,
+export const router = createRouter({
+  history: createWebHashHistory(),
   routes: [
     {
       path: "/",
       name: "socks-listing",
-      component: SocksListing
+      component: SocksListing,
     },
     {
       path: "/counter",
-      name: "vuex-counter",
+      name: "pinia-counter",
       // route level code-splitting
       // this generates a separate chunk (counter.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "counter" */ "./views/Counter.vue")
+      component: () =>
+        import(/* webpackChunkName: "counter" */ "./views/Counter.vue"),
     },
     {
       path: "/cart",
       name: "cart",
-      component: Cart
-    }
-
+      component: Cart,
+    },
 
     // {
     //   path: '/product/:id',
@@ -39,5 +36,5 @@ export default new Router({
     // path: "/user/:username/post/:post_id"
     // Matches: /user/eve/post/42
     // params are: { username: 'eve', post_id: '42' }
-  ]
+  ],
 });

@@ -43,8 +43,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { State, Getter, Action, Mutation, namespace } from 'vuex-class';
+import { Vue } from "vue-class-component";
+import { Prop } from "vue-property-decorator";
 import ProductReview from './ProductReview.vue';
 import { ProductModel, ProductVariantModel, ProductReviewModel } from '../models/ProductModels';
 
@@ -54,11 +54,6 @@ export interface ProductReviewPostModel {
 }
 
 
-@Component({
-  components: {
-    ProductReview
-  }
-})
 export default class Product extends Vue {
   // Prop() decorator binds the field to the store
   // {default: false} argument is optional
@@ -97,7 +92,7 @@ export default class Product extends Vue {
   }
 
   addReview(review: ProductReviewPostModel): void {
-    const reviews = this.product.reviews as any;
+    const reviews = this.product.reviews;
     // TODO: reviews is a @Prop() and is readonly.
     // Mutate the product in the store!
     // reviews.push(review.rating);

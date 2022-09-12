@@ -91,8 +91,9 @@ app.component('product-review', {
   },
 
   // LifeCycle Methods
-  created() {
-    console.log('product-review created');
+  // https://vuejs.org/api/options-lifecycle.html
+  beforeMount() {
+    console.log('product-review beforeMount');
   },
   mounted() {
     console.log('product-review mounted');
@@ -100,11 +101,8 @@ app.component('product-review', {
   updated() {
     console.log('product-review updated');
   },
-  destroyed() {
-    console.log('product-review destroyed');
-  },
-  beforeDestroy() {
-    console.log('product-review beforeDestroy');
+  unmounted() {
+    console.log('product-review unmounted');
   },
 });
 

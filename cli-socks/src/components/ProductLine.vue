@@ -10,13 +10,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { State, Getter, Action, Mutation, namespace } from 'vuex-class';
+import { Vue } from "vue-class-component";
+import { Prop } from "vue-property-decorator";
 import { ProductModel, ProductVariantModel, ProductReviewModel } from '../models/ProductModels';
 
-@Component({
-  components: {}
-})
+
 export default class ProductLine extends Vue {
   @Prop() product!: ProductModel;
 

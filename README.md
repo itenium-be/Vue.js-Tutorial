@@ -1,12 +1,9 @@
 Vue.js Technical Session
 ========================
 
-State Management: Vuex -> Pinia
-
 # Prerequisites <small>(optional)</small>
 
 Node 16.10.0
-
 
 - Install the Chrome [Vue.js devtools](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=en)
 - Install the Visual Studio Code [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) extension
@@ -26,12 +23,13 @@ npx http-server
 # cli-socks
 
 Converted `01-HelloWorld` to a with Vue CLI **Vite** generated "full blown" application
-(Routing Vuex, SCSS, TypeScript, ...)
+(Routing, Store, SCSS, TypeScript, ...)
 
 ## Installation
 ```
 cd cli-socks
 npm install
+npm run dev
 ```
 
 ATTN: Some Webstorm attendees needed to do an additional `npm install node-sass`.
@@ -63,11 +61,4 @@ Scaffold projects in Vue, React, ...
 npm create vite@latest
 ```
 
-VitePress: static website generator
-
-
-## Testing
-
-```
-npm run test:unit
-```
+[VitePress](https://vitepress.vuejs.org/): static website generator

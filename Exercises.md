@@ -31,8 +31,8 @@ E. Allow to order more/less of a product in the Cart.
 F. Calculate the total Cart cost. (with shipping costs?)  
 
 
-5 Vuex
-------
+5 Pinia (Store)
+---------------
 A. Put the `Product.vue` product properties in `store.ts` in a products array.  
 B. Turn product into a `@Prop() product!: any` of `Product.vue`.  
 C. On the main page, loop over the products and display them.  

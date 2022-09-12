@@ -21,15 +21,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { State, Getter, Action, Mutation, namespace } from 'vuex-class';
+import { Vue } from "vue-class-component";
 import Product from "../components/Product.vue";
+import { ProductModel } from "../models/ProductModels";
 
-@Component({
-  components: {
-    Product
-  }
-})
+
 export default class SocksListing extends Vue {
   premium = true;
 
@@ -51,7 +47,7 @@ export default class SocksListing extends Vue {
   };
 
 
-  updateCart(product: any) {
+  updateCart(product: string): void {
     console.log("Adding to cart:", product);
     this.cart.push(product);
   }

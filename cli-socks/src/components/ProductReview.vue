@@ -29,12 +29,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { State, Getter, Action, Mutation, namespace } from 'vuex-class';
+import { Vue } from "vue-class-component";
+import { Prop } from "vue-property-decorator";
 import { ProductReviewModel } from '../models/ProductModels';
 
 
-@Component
 export default class ProductReview extends Vue {
   @Prop() productId!: number;
 

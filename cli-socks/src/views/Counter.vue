@@ -1,7 +1,7 @@
-<!-- Basic Vuex example -->
+<!-- Basic Pinia (Store) example -->
 <template>
   <div class="counter">
-    <h1>Vuex Counter</h1>
+    <h1>Pinia Counter</h1>
     <p>{{ countAlias }}</p>
     <p>
       <button @click="increment">+</button>
@@ -11,11 +11,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-//import { mapState, mapGetters } from 'vuex';
-import { State, Getter, Action, Mutation, namespace } from 'vuex-class';
+import { Vue } from "vue-class-component";
 
-@Component
+
 export default class Counter extends Vue {
   get count(): number {
     // Select state directly from store
