@@ -1,4 +1,5 @@
 <script lang="ts">
+// Composition API
 import Product from "../components/Product.vue";
 import { ProductModel } from "../models/ProductModels";
 import { ref, reactive, computed } from 'vue';

@@ -6,7 +6,7 @@ const app = Vue.createApp({
     };
   },
   methods: {
-    updateCart(product) {
+    updateCart(product, variant) {
       console.log('Adding to cart:', product);
       this.cart.push(product);
     }
@@ -23,8 +23,8 @@ app.component('product', {
     premium: {type: Boolean, required: true, default: false},
     // Types: String, Number, Array, Object, Function, Promise, any ctor
     // Null and undefined always pass validation
-    // oneOf: [String, Number],
-    // special: {
+    // nameOfProp: [String, Number],
+    // nameOfAnotherProp: {
     //   default() { return 'calculatedValue'; },
     //   validator(value) { return true; }
     // }

@@ -15,6 +15,7 @@ const app = Vue.createApp({
 
 
 
+// Options API
 app.component('product-review', {
   template: `
     <form class="review-form" @submit.prevent="onSubmit">
@@ -22,7 +23,7 @@ app.component('product-review', {
       <!-- .prevent => .preventDefault() -->
       <!-- .stop => .stopPropagation() -->
       <!-- .once => Unregister after first trigger -->
-      <!-- .self => Trigger only when the element is the .target -->
+      <!-- .self => Trigger only when the element is the $event.target -->
 
       <h3>Add Review</h3>
       <label>Name</label>
